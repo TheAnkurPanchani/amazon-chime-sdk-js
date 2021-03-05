@@ -337,7 +337,9 @@ export default class DefaultVideoStreamIndex implements VideoStreamIndex {
     if (!this.subscribeTrackToStreamMap) {
       return undefined;
     }
-    return this.subscribeTrackToStreamMap.get(trackId);
+    for (const [key, value] of this.subscribeTrackToStreamMap) {
+      if (trackId.startsWith(key)) return value
+    }
   }
 
   streamIdForSSRC(ssrcId: number): number {
